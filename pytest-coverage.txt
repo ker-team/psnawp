@@ -4,13 +4,2968 @@ rootdir: /home/runner/work/psnawp/psnawp, configfile: pyproject.toml, testpaths:
 plugins: cov-4.0.0, vcr-1.0.2
 collected 63 items
 
-tests/unit_tests/test_authenticator.py .                                 [  1%]
-tests/unit_tests/test_client.py ................                         [ 26%]
-tests/unit_tests/test_game_title.py .........                            [ 41%]
-tests/unit_tests/test_group.py .........                                 [ 55%]
-tests/unit_tests/test_search.py ...                                      [ 60%]
-tests/unit_tests/test_user.py .........................                  [100%]
+tests/unit_tests/test_authenticator.py F                                 [  1%]
+tests/unit_tests/test_client.py ..EEEEEEEEEEEEEE                         [ 26%]
+tests/unit_tests/test_game_title.py EEEEEEEEE                            [ 41%]
+tests/unit_tests/test_group.py EEEEEEEEE                                 [ 55%]
+tests/unit_tests/test_search.py EEE                                      [ 60%]
+tests/unit_tests/test_user.py EEEEEEEEEEEEEEEEEEEEEEEEE                  [100%]
 
+==================================== ERRORS ====================================
+___________________ ERROR at setup of test_client__online_id ___________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+__________________ ERROR at setup of test_client__account_id ___________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+______________ ERROR at setup of test_client__get_profile_legacy _______________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+________________ ERROR at setup of test_client__account_devices ________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+__________________ ERROR at setup of test_client__get_friends __________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+__________________ ERROR at setup of test_client__get_groups ___________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_______________ ERROR at setup of test_client__available_to_play _______________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_________________ ERROR at setup of test_client__blocked_list __________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+________________ ERROR at setup of test_client__trophy_summary _________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_________________ ERROR at setup of test_client__trophy_titles _________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+____________ ERROR at setup of test_client__trophy_titles_for_title ____________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+___________________ ERROR at setup of test_client__trophies ____________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_____________ ERROR at setup of test_client__trophy_groups_summary _____________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_________________ ERROR at setup of test_client__repr_and_str __________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+____________ ERROR at setup of test_game_title__np_communication_id ____________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+______________ ERROR at setup of test_game_title__wrong_title_id _______________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_____________ ERROR at setup of test_game_title__get_title_details _____________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_________________ ERROR at setup of test_game_title__trophies __________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+___________ ERROR at setup of test_game_title__trophy_groups_summary ___________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+______ ERROR at setup of test_game_title__trophies_game_not_owned_by_user ______
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_ ERROR at setup of test_game_title__trophy_groups_summary_game_not_owned_by_user _
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+___ ERROR at setup of test_game_title__trophies_invalid_np_communication_id ____
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_ ERROR at setup of test_game_title__trophy_groups_summary_invalid_np_communication_id _
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+______________ ERROR at setup of test_group__group_incorrect_args ______________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+______________ ERROR at setup of test_group__group_with_wrong_id _______________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+________________ ERROR at setup of test_group__group_with_users ________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_________________ ERROR at setup of test_group__group_with_id __________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+__________________ ERROR at setup of test_group__repr_and_str __________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_________________ ERROR at setup of test_group__change_name_dm _________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_______________ ERROR at setup of test_group__dming_blocked_user _______________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+__________________ ERROR at setup of test_group__change_name ___________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+__________________ ERROR at setup of test_group__leave_group ___________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_______________ ERROR at setup of test_search__universal_search ________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_________________ ERROR at setup of test_search__get_title_id __________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+___________ ERROR at setup of test_search__get_title_id_wrong_title ____________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+______________________ ERROR at setup of test_user__user _______________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_________________ ERROR at setup of test_user__user_account_id _________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+________________ ERROR at setup of test_user__user_no_argument _________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+________________ ERROR at setup of test_user__user_wrong_acc_id ________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_________________ ERROR at setup of test_user__prev_online_id __________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_________________ ERROR at setup of test_user__user_not_found __________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_____________ ERROR at setup of test_user__user_acct_id_not_found ______________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+___________________ ERROR at setup of test_user__get_profile ___________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+__________________ ERROR at setup of test_user__get_presence ___________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_____________ ERROR at setup of test_user__get_presence_forbidden ______________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+___________________ ERROR at setup of test_user__friendship ____________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+___________________ ERROR at setup of test_user__is_blocked ____________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_________________ ERROR at setup of test_user__trophy_summary __________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+____________ ERROR at setup of test_user__trophy_summary_forbidden _____________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+__________________ ERROR at setup of test_user__trophy_titles __________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_____________ ERROR at setup of test_user__trophy_titles_forbidden _____________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+__________ ERROR at setup of test_user__trophy_titles_pagination_test __________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_____________ ERROR at setup of test_user__trophy_titles_for_title _____________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+________ ERROR at setup of test_user__trophy_titles_for_title_forbidden ________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+____________________ ERROR at setup of test_user__trophies _____________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_______________ ERROR at setup of test_user__trophies_forbidden ________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+____________ ERROR at setup of test_user__trophies_pagination_test _____________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+______________ ERROR at setup of test_user__trophy_groups_summary ______________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+_________ ERROR at setup of test_user__trophy_groups_summary_forbidden _________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+__________________ ERROR at setup of test_user__repr_and_str ___________________
+
+    @pytest.fixture(scope="session")
+    def psnawp_fixture():
+>       return PSNAWP(os.getenv("NPSSO_CODE"))
+
+tests/conftest.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py:39: in __init__
+    self._request_builder = request_builder.RequestBuilder(authenticator.Authenticator(npsso_cookie))
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:34: in __init__
+    self._authenticate()
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py:112: in _authenticate
+    response.raise_for_status()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Response [400]>
+
+    def raise_for_status(self):
+        """Raises :class:`HTTPError`, if one occurred."""
+    
+        http_error_msg = ""
+        if isinstance(self.reason, bytes):
+            # We attempt to decode utf-8 first because some servers
+            # choose to localize their reason strings. If the string
+            # isn't utf-8, we fall back to iso-8859-1 for all other
+            # encodings. (See PR #3538)
+            try:
+                reason = self.reason.decode("utf-8")
+            except UnicodeDecodeError:
+                reason = self.reason.decode("iso-8859-1")
+        else:
+            reason = self.reason
+    
+        if 400 <= self.status_code < 500:
+            http_error_msg = (
+                f"{self.status_code} Client Error: {reason} for url: {self.url}"
+            )
+    
+        elif 500 <= self.status_code < 600:
+            http_error_msg = (
+                f"{self.status_code} Server Error: {reason} for url: {self.url}"
+            )
+    
+        if http_error_msg:
+>           raise HTTPError(http_error_msg, response=self)
+E           requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/requests/models.py:1021: HTTPError
+=================================== FAILURES ===================================
+_____________ test_authenticator__access_token_from_refresh_token ______________
+
+    @pytest.mark.vcr()
+    def test_authenticator__access_token_from_refresh_token():
+        with my_vcr.use_cassette(f"{inspect.currentframe().f_code.co_name}.yaml"):
+            psnawp = psnawp_api.psnawp.PSNAWP(os.getenv("NPSSO_CODE"))
+            psnawp._request_builder.authenticator._auth_properties["access_token_expires_at"] = time.time() - 3600
+            client = psnawp.me()
+>           assert client.online_id == os.getenv("USER_NAME")
+E           AssertionError: assert 'VaultTec-Co' == ''
+E             + VaultTec-Co
+
+tests/unit_tests/test_authenticator.py:17: AssertionError
 -------- generated xml file: /home/runner/work/psnawp/psnawp/pytest.xml --------
 
 ---------- coverage: platform linux, python 3.11.0-final-0 -----------
@@ -21,24 +2976,87 @@ Name                                                                            
 /opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/authenticator.py                     46      3    93%
 /opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/core/psnawp_exceptions.py                  9      0   100%
 /opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/__init__.py                         0      0   100%
-/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/client.py                          65      0   100%
-/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/game_title.py                      22      0   100%
-/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/group.py                           52      0   100%
-/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/search.py                          22      0   100%
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/client.py                          65     28    57%
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/game_title.py                      22     10    55%
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/group.py                           52     35    33%
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/search.py                          22     12    45%
 /opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/trophies/__init__.py                0      0   100%
-/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/trophies/trophy.py                113      0   100%
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/trophies/trophy.py                113     52    54%
 /opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/trophies/trophy_constants.py       25      0   100%
-/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/trophies/trophy_group.py           89      0   100%
-/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/trophies/trophy_summary.py         25      0   100%
-/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/trophies/trophy_titles.py          84      0   100%
-/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/trophies/utility_functions.py      10      0   100%
-/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/user.py                            66      0   100%
-/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py                                 35      0   100%
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/trophies/trophy_group.py           89     32    64%
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/trophies/trophy_summary.py         25      5    80%
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/trophies/trophy_titles.py          84     36    57%
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/trophies/utility_functions.py      10      3    70%
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/models/user.py                            66     40    39%
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/psnawp.py                                 35     14    60%
 /opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/utils/__init__.py                          0      0   100%
 /opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/utils/endpoints.py                         2      0   100%
 /opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/utils/misc.py                             13      0   100%
-/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/utils/request_builder.py                  72     15    79%
+/opt/hostedtoolcache/Python/3.11.0/x64/lib/python3.11/site-packages/psnawp_api/utils/request_builder.py                  72     42    42%
 -----------------------------------------------------------------------------------------------------------------------------------------
-TOTAL                                                                                                                   751     18    98%
+TOTAL                                                                                                                   751    312    58%
 
-============================== 63 passed in 2.74s ==============================
+=========================== short test summary info ============================
+FAILED tests/unit_tests/test_authenticator.py::test_authenticator__access_token_from_refresh_token - AssertionError: assert 'VaultTec-Co' == ''
+  + VaultTec-Co
+ERROR tests/unit_tests/test_client.py::test_client__online_id - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_client.py::test_client__account_id - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_client.py::test_client__get_profile_legacy - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_client.py::test_client__account_devices - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_client.py::test_client__get_friends - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_client.py::test_client__get_groups - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_client.py::test_client__available_to_play - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_client.py::test_client__blocked_list - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_client.py::test_client__trophy_summary - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_client.py::test_client__trophy_titles - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_client.py::test_client__trophy_titles_for_title - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_client.py::test_client__trophies - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_client.py::test_client__trophy_groups_summary - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_client.py::test_client__repr_and_str - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_game_title.py::test_game_title__np_communication_id - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_game_title.py::test_game_title__wrong_title_id - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_game_title.py::test_game_title__get_title_details - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_game_title.py::test_game_title__trophies - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_game_title.py::test_game_title__trophy_groups_summary - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_game_title.py::test_game_title__trophies_game_not_owned_by_user - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_game_title.py::test_game_title__trophy_groups_summary_game_not_owned_by_user - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_game_title.py::test_game_title__trophies_invalid_np_communication_id - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_game_title.py::test_game_title__trophy_groups_summary_invalid_np_communication_id - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_group.py::test_group__group_incorrect_args - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_group.py::test_group__group_with_wrong_id - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_group.py::test_group__group_with_users - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_group.py::test_group__group_with_id - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_group.py::test_group__repr_and_str - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_group.py::test_group__change_name_dm - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_group.py::test_group__dming_blocked_user - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_group.py::test_group__change_name - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_group.py::test_group__leave_group - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_search.py::test_search__universal_search - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_search.py::test_search__get_title_id - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_search.py::test_search__get_title_id_wrong_title - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__user - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__user_account_id - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__user_no_argument - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__user_wrong_acc_id - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__prev_online_id - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__user_not_found - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__user_acct_id_not_found - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__get_profile - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__get_presence - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__get_presence_forbidden - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__friendship - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__is_blocked - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__trophy_summary - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__trophy_summary_forbidden - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__trophy_titles - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__trophy_titles_forbidden - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__trophy_titles_pagination_test - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__trophy_titles_for_title - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__trophy_titles_for_title_forbidden - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__trophies - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__trophies_forbidden - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__trophies_pagination_test - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__trophy_groups_summary - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__trophy_groups_summary_forbidden - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+ERROR tests/unit_tests/test_user.py::test_user__repr_and_str - requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=ac8d161a-d966-4728-b0ea-ffec22f69edc&scope=psn%3Aclientapp+psn%3Amobile.v1&redirect_uri=com.playstation.PlayStationApp%3A%2F%2Fredirect&response_type=code
+==================== 1 failed, 2 passed, 60 errors in 3.28s ====================
